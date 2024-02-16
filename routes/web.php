@@ -34,6 +34,7 @@ Route::get('/posts/create', [PostController::class, 'create'])->name('posts.crea
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
 Route::get('/achizition.index', [FileController::class, 'index'])->name('files.index');
+Route::get('files/open/{id}', [FileController::class, 'openFile'])->name('files.open');
 
 Route::middleware('auth')->group(function () {
 Route::post('/achizition', [FileController::class, 'store'])->name('files.store');

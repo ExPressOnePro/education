@@ -26,7 +26,11 @@
         <thead>
         <tr>
             <th>Nume fișier</th>
+            @auth
+                @if(Auth::user()->role === 'Admin')
             <th>Data adăugării</th>
+                @endif
+            @endauth
             <th>Data publicării</th>
             <th>Anul</th>
             @auth
@@ -40,11 +44,14 @@
         <tbody>
         @foreach($files as $file)
             <tr data-file-id="{{ $file->id }}" data-file-name="{{ $file->file_name }}" data-year="{{ $file->year }}" data-publication-date="{{ $file->publication_date }}">
-                <td onclick="window.open('{{ asset('storage/' . $file->real_path) }}', '_blank');">
-                    <a href="" class="h6">
-                        {{ $file->file_name }}
-                    </a></td>
-                <td>{{ $file->created_at }}</td>
+                <td onclick="window.open('{{ route('files.open', $file->id) }}', '_blank');">
+                    <a href="#" class="h6">{{ $file->file_name }}</a>
+                </td>
+                @auth
+                    @if(Auth::user()->role === 'Admin')
+                        <td>{{ $file->created_at }}</td>
+                    @endif
+                @endauth
                 <td>{{ $file->publication_date }}</td>
                 <td>{{ $file->year }}</td>
                 @auth

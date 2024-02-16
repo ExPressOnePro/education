@@ -32,6 +32,14 @@ class FileController extends Controller
         //
     }
 
+    public function openFile($id)
+    {
+        $file = File::findOrFail($id);
+        $filePath = storage_path('app/public/' . $file->real_path);
+
+        return response()->file($filePath);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
