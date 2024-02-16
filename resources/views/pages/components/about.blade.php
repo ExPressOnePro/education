@@ -34,4 +34,15 @@
         </div>
     </div>
 </div>
+    <div id="contact" class="contact text-center">
+        <div class="container">
+            <ul>
+                <li>
+                    <a class="text-center align-items-center" href="https://www.facebook.com/people/Gimnaziul-Semeni/100080282674422/?paipv=0&eav=AfaMRwHR-_hLKHoPO9P_bbGyGpDDZHlLYaVMBuSd5K5s9aw59lfg7o_K_EvMgUaOT08&_rdr">
+                        <i class="fa fa-facebook"></i> Facebook
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
