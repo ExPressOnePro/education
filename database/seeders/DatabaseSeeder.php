@@ -15,8 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::factory()->count(20)->create();
-        Category::factory()->count(10)->create();
-        ProductCategory::factory()->count(10)->create();
+        $this->call(SlideSeeder::class);
     }
 }
