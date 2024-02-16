@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\post;
 use App\Models\Product;
 
+use App\Models\slide;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -13,27 +15,32 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function main() {
-        $products = Product::get();
-
-        $compact = compact( 'products');
-        return view('pages.main', $compact);
+    public function home() {
+        return view('pages.home');
     }
-    public function product(Request $request, $domain_name) {
 
-        $product = Product::where('domain_name', $domain_name)->firstOrFail();
-        $product->increment('views');
-        $products = Product::get();
-        $productCategories = $product->categories ?? [];
+    public function main() {
+        $posts = post::query()->get();
+        $slides = slide::get();
+        $compact = compact('posts', 'slides');
+        return view('pages.components.main',$compact);
+    }
+    public function about() {
+        return view('pages.components.about');
+    }
+
+    public function news(Request $request) {
+        $posts = post::query()->get();
+        $compact = compact('posts');
+        return view('pages.components.posts', $compact);
+    }
 
 
-        $compact = compact(
-            'product',
-            'products',
-            'productCategories'
-        );
+    public function post(Request $request, $id) {
+        $post = post::query()->find($id);
 
-        return view('pages.product', $compact);
+        $compact = compact('post');
+        return view('pages.components.post', $compact);
     }
 
 

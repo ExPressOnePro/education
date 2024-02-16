@@ -1,15 +1,36 @@
-<header class="py-3 mb-4 sticky-top bg-white border-bottom">
-    <div class="container d-flex flex-wrap justify-content-center">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-            <span class="fs-4">Domain.md</span>
-        </a>
 
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-        </ul>
+<style>
+    @media print {
+        .header {
+            display: none;
+        }
+    }
+    .nav-header-link:hover {
+        background-color: #e5e5e5;
+    }
+</style>
+<div id="navbar" class="navbar navbar-expand-lg navbar-fixed">
+    <div class="container">
+        <a href="/" class="navbar-brand"><img class="img-fluid"  width="40" height="32" src="{{ asset('/logo.svg') }}">Gimnaziul Semeni</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{{route('achizition') }}">Achiziții publice</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{route('about') }}">Contacte</a></li>
+                @if(!Auth::user())
+                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link link-body-emphasis text-decoration-none" >Войти</a></li>
+                @else
+                    <li class="nav-item"><a class="nav-link link-body-emphasis text-decoration-none" href=""  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Log Out
+                        </a></li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                @endif
+            </ul>
+        </div>
     </div>
-</header>
+</div>
