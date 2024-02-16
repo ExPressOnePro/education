@@ -23,11 +23,6 @@ Route::get('contacts', [Controller::class, 'home'])->name('about');
 Route::get('news', [Controller::class, 'home'])->name('posts');
 Route::get('achizition', [Controller::class, 'home'])->name('achizition');
 
-Route::get('/create-symlink', function () {
-    Artisan::call('storage:link');
-    return 'Symbolic link created';
-});
-
 Route::get('/mainJs', [Controller::class, 'main'])->name('page.main');
 
 Route::get('contactsJs', [Controller::class, 'about'])->name('aboutAjax');
@@ -42,15 +37,12 @@ Route::get('files/open/{id}', [FileController::class, 'openFile'])->name('files.
 Route::get('storage/app/public/uploads/{id}', [SlideController::class, 'openFile'])->name('slide.open');
 
 Route::middleware('auth')->group(function () {
-Route::post('/achizition', [FileController::class, 'store'])->name('files.store');
-Route::post('/files/{id}',  [FileController::class, 'update'])->name('files.update');
-Route::post('/slides/{id}',  [SlideController::class, 'update'])->name('slides.update');
-Route::delete('/files_destroy/{id}', [FileController::class, 'destroy'])->name('files.destroy');
 
-Route::get('migrate', function () {
-    $exitCode = Artisan::call('migrate:fresh --seed --force');
-});
 
+    Route::post('/achizition', [FileController::class, 'store'])->name('files.store');
+    Route::post('/files/{id}',  [FileController::class, 'update'])->name('files.update');
+    Route::post('/slides/{id}',  [SlideController::class, 'update'])->name('slides.update');
+    Route::delete('/files_destroy/{id}', [FileController::class, 'destroy'])->name('files.destroy');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
