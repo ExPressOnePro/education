@@ -1,3 +1,4 @@
+
 <div class="container">
     <h1>Files</h1>
     <form action="{{ route('files.store') }}" method="post" enctype="multipart/form-data">

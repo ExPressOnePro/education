@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\slide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -78,6 +79,14 @@ class SlideController extends Controller
         $slide->save();
 
         return redirect()->back()->with('success', 'Slide updated successfully');
+    }
+
+    public function openFile($id)
+    {
+        $file = slide::findOrFail($id);
+        $filePath = storage_path('app/public/' . $file->photo);
+
+        return response()->file($filePath);
     }
 
     /**

@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container mt-4">
 
     @auth
         @if(Auth::user()->role === 'Admin')
@@ -22,7 +22,7 @@
 
 
     <h2>Fișiere încărcate</h2>
-    <table class="table table-hover">
+    <table class="table table-hover  mt-4">
         <thead>
         <tr>
             <th>Nume fișier</th>
