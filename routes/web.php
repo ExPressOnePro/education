@@ -23,6 +23,10 @@ Route::get('contacts', [Controller::class, 'home'])->name('about');
 Route::get('news', [Controller::class, 'home'])->name('posts');
 Route::get('achizition', [Controller::class, 'home'])->name('achizition');
 
+Route::get('/create-symlink', function () {
+    Artisan::call('storage:link');
+    return 'Symbolic link created';
+});
 
 Route::get('/mainJs', [Controller::class, 'main'])->name('page.main');
 
@@ -35,7 +39,7 @@ Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
 Route::get('/achizition.index', [FileController::class, 'index'])->name('files.index');
 Route::get('files/open/{id}', [FileController::class, 'openFile'])->name('files.open');
-Route::get('slide/open/{id}', [SlideController::class, 'openFile'])->name('slide.open');
+Route::get('storage/app/public/uploads/{id}', [SlideController::class, 'openFile'])->name('slide.open');
 
 Route::middleware('auth')->group(function () {
 Route::post('/achizition', [FileController::class, 'store'])->name('files.store');
