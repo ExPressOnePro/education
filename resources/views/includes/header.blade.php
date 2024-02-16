@@ -26,10 +26,10 @@
                 <li class="nav-item"><a class="nav-link" href="{{route('achizition') }}">Achiziții publice</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('about') }}">Contacte</a></li>
                 @if(!Auth::user())
-                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link link-body-emphasis text-decoration-none" >Войти</a></li>
+                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link link-body-emphasis text-decoration-none" >Intrare</a></li>
                 @else
                     <li class="nav-item"><a class="nav-link link-body-emphasis text-decoration-none" href=""  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Log Out
+                            Ieșire
                         </a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf

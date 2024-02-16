@@ -75,6 +75,12 @@
         height: 225px; /* или любая другая фиксированная высота */
         object-fit: cover; /* чтобы изображения заполняли контейнер, сохраняя пропорции */
     }
+    .carousel-item img {
+        object-fit: cover; /* Масштабирует изображение так, чтобы оно полностью покрывало блок */
+        object-position: center; /* Выравнивает изображение по центру блока */
+        width: 100%;
+        height: 100%;
+    }
 </style>
 
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -90,7 +96,7 @@
                 <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
                 <div class="container">
                     <div class="carousel-caption text-start">
-                        <h1>{{ $slide->title }}</h1>
+                        <h2>{{ $slide->title }}</h2>
                         <p class="opacity-75">{{ $slide->content }}</p>
                         @auth
                             @if(Auth::user()->role === 'Admin')
@@ -106,22 +112,22 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $slide->id }}">Edit Slide</h5>
+                            <h5 class="modal-title" id="editModalLabel{{ $slide->id }}">Editați diapozitivul</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form id="editForm{{ $slide->id }}" method="post" action="{{ route('slides.update', $slide->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="editTitle{{ $slide->id }}" class="form-label">Title</label>
+                                    <label for="editTitle{{ $slide->id }}" class="form-label">Titlu</label>
                                     <input type="text" class="form-control" id="editTitle{{ $slide->id }}" name="title" value="{{ $slide->title }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="editContent{{ $slide->id }}" class="form-label">Content</label>
+                                    <label for="editContent{{ $slide->id }}" class="form-label">Conţinut</label>
                                     <textarea class="form-control" id="editContent{{ $slide->id }}" name="content">{{ $slide->content }}</textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="editPhoto{{ $slide->id }}" class="form-label">Select Photo</label>
+                                    <label for="editPhoto{{ $slide->id }}" class="form-label">Selectați <Fotografie></Fotografie></label>
                                     <input type="file" class="form-control" id="editPhoto{{ $slide->id }}" name="photo">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Salvați</button>
