@@ -11,7 +11,12 @@
 </style>
 <div id="navbar" class="navbar navbar-expand-lg navbar-fixed">
     <div class="container">
-        <a href="/" class="navbar-brand"><img class="img-fluid"  width="40" height="32" src="{{ asset('/logo.svg') }}">Gimnaziul Semeni</a>
+        <a href="/" class="d-sm-block">
+            <img class="img-fluid" width="40" height="32" src="{{ asset('/logo.svg') }}" alt="Gimnaziul Semeni Logo">
+        </a>
+        <a href="/" class="navbar-brand d-none d-lg-block">
+            Gimnaziul Semeni
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars"></i>
         </button>

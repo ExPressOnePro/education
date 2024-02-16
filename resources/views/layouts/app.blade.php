@@ -13,7 +13,8 @@
         </div>
     </main>
 </div>
-@include('includes.footer')
+
+{{--@include('includes.footer')--}}
 
 @include('includes.scripts')
 </body>

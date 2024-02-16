@@ -1,7 +1,9 @@
+
 <div class="container">
+
     @auth
-    @if(Auth::user()->role === 'Admin')
-    <h1>Fișiere</h1>
+        @if(Auth::user()->role === 'Admin')
+            <h1>Fișiere</h1>
             <form action="{{ route('files.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
@@ -15,23 +17,25 @@
                 <button type="submit" class="btn btn-primary">Încărcați fișierul</button>
             </form>
             <hr>
-    @endif
+        @endif
     @endauth
-        <h2>Fișiere încărcate</h2>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Nume fișier</th>
-                <th>Data adăugării</th>
-                <th>Data publicării</th>
-                <th>Anul</th>
-                @auth
-                    @if(Auth::user()->role === 'Admin')
-                        <th>Dimensiune fișier</th>
-                        <th>Acțiuni</th>
-                    @endif
-                @endauth
-            </tr>
+
+
+    <h2>Fișiere încărcate</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Nume fișier</th>
+            <th>Data adăugării</th>
+            <th>Data publicării</th>
+            <th>Anul</th>
+            @auth
+                @if(Auth::user()->role === 'Admin')
+                    <th>Dimensiune fișier</th>
+                    <th>Acțiuni</th>
+                @endif
+            @endauth
+        </tr>
         </thead>
         <tbody>
         @foreach($files as $file)
@@ -44,17 +48,16 @@
                 <td>{{ $file->publication_date }}</td>
                 <td>{{ $file->year }}</td>
                 @auth
-                @if(Auth::user()->role === 'Admin')
-                <td>{{ $file->file_size }}</td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-outline-secondary edit-btn">Editați</button>
-                    <form action="{{ route('files.destroy', $file->id) }}" method="post" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-outline-danger">Șterge</button>
-                    </form>
-                </td>
-                @endif
+                    @if(Auth::user()->role === 'Admin')
+                        <td>{{ $file->file_size }}</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-outline-secondary edit-btn">Editați</button>
+                            <form action="{{ route('files.destroy', $file->id) }}" method="post" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Șterge</button>
+                            </form>
+                        </td>
+                    @endif
                 @endauth
 
             </tr>
@@ -62,6 +65,7 @@
         </tbody>
     </table>
 </div>
+
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

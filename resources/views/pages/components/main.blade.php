@@ -77,7 +77,7 @@
     }
 </style>
 
-<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -110,7 +110,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="editForm{{ $slide->id }}" method="post" action="{{ route('slides.update', $slide->id) }}">
+                            <form id="editForm{{ $slide->id }}" method="post" action="{{ route('slides.update', $slide->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="editTitle{{ $slide->id }}" class="form-label">Title</label>
@@ -124,7 +124,7 @@
                                     <label for="editPhoto{{ $slide->id }}" class="form-label">Select Photo</label>
                                     <input type="file" class="form-control" id="editPhoto{{ $slide->id }}" name="photo">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button type="submit" class="btn btn-primary">Salvați</button>
                             </form>
                         </div>
                     </div>

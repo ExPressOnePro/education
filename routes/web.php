@@ -33,10 +33,9 @@ Route::get('post/{id}', [Controller::class, 'home'])->name('post');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
-
+Route::get('/achizition.index', [FileController::class, 'index'])->name('files.index');
 
 Route::middleware('auth')->group(function () {
-Route::get('/achizition.index', [FileController::class, 'index'])->name('files.index');
 Route::post('/achizition', [FileController::class, 'store'])->name('files.store');
 Route::post('/files/{id}',  [FileController::class, 'update'])->name('files.update');
 Route::post('/slides/{id}',  [SlideController::class, 'update'])->name('slides.update');

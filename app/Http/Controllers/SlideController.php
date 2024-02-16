@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\slide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SlideController extends Controller
 {
@@ -64,14 +65,16 @@ class SlideController extends Controller
 
         // Проверяем, было ли загружено новое изображение для слайда
         if ($request->hasFile('photo')) {
-            // Обновляем изображение слайда
+            if ($slide->photo && Storage::disk('public')->exists($slide->photo)) {
+                Storage::disk('public')->delete($slide->photo);
+            }
+
+            // Сохраняем новое изображение
             $file = $request->file('photo');
-            $filename = $file->getClientOriginalName();
-            $path = $file->storeAs('slides', $filename, 'public');
+            $path = $file->storeAs('uploads', 'slide_'.$slide->id . '.jpg', 'public');
             $slide->photo = $path;
         }
 
-        // Сохраняем обновленные данные
         $slide->save();
 
         return redirect()->back()->with('success', 'Slide updated successfully');

@@ -22,5 +22,6 @@
 
 
 
-    <link rel="apple-touch-icon" href="{{ asset('logo.svg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('/logo.svg') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('logo.svg') }}">
 </head>

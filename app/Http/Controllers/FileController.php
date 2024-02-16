@@ -46,8 +46,6 @@ class FileController extends Controller
 
         $fileType = $file->getClientMimeType(); // Получение MIME-типа файла
         $fileSize = $file->getSize(); // Получение размера файла в байтах
-
-
         $real_path = $request->file('file')->storeAs('uploads', $name .'.'. $file->getClientOriginalExtension(), 'public');
 
         $fileModel = new File();
