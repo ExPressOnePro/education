@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/achizition', [FileController::class, 'store'])->name('files.store');
     Route::post('/files/{id}',  [FileController::class, 'update'])->name('files.update');
     Route::post('/slides/{id}',  [SlideController::class, 'update'])->name('slides.update');
-    Route::delete('/files_destroy/{id}', [FileController::class, 'destroy'])->name('files.destroy');
+    Route::post('/files_destroy/{id}', [FileController::class, 'destroy'])->name('files.destroy');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
