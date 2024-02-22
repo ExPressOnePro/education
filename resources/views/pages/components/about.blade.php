@@ -34,8 +34,28 @@
         </div>
     </div>
 </div>
+    <style>
+        /* Стили для обертки карты */
+        .map-container {
+            width: 100%;
+            height: 400px; /* Высота карты */
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #ccc; /* Граница для эффекта обрамления */
+            border-radius: 10px; /* Закругление углов */
+        }
+        /* Стили для iframe с картой */
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+    <div class="map-container">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=27.751808047771457%2C47.26710093167537%2C27.756676912307742%2C47.27229556315669&amp;layer=mapnik" allowfullscreen></iframe>
+    </div>
     <div id="contact" class="contact text-center">
-        <div class="container">
+            <div class="container">
             <ul>
                 <li>
                     <a class="text-center align-items-center" href="https://www.facebook.com/people/Gimnaziul-Semeni/100080282674422/?paipv=0&eav=AfaMRwHR-_hLKHoPO9P_bbGyGpDDZHlLYaVMBuSd5K5s9aw59lfg7o_K_EvMgUaOT08&_rdr">
