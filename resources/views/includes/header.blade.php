@@ -9,7 +9,7 @@
         background-color: #e5e5e5;
     }
 </style>
-<div id="navbar" class="navbar navbar-expand-lg navbar-fixed">
+<div id="navbar" class="navbar navbar-expand-lg navbar-fixed mb-4">
     <div class="container">
         <a href="/" class="d-sm-block me-3">
             <img class="img-fluid" width="40" height="32" src="{{ asset('/logo.svg') }}" alt="Gimnaziul Semeni Logo">

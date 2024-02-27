@@ -52,7 +52,8 @@
         }
     </style>
     <div class="map-container">
-        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=27.751808047771457%2C47.26710093167537%2C27.756676912307742%2C47.27229556315669&amp;layer=mapnik" allowfullscreen></iframe>
+        <iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=27.74798363183143%2C47.26833891417724%2C27.755799588900828%2C47.27156031342954&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=18/47.26995/27.75283&layers=N">Посмотреть более крупную карту</a></small></iframe>
+
     </div>
     <div id="contact" class="contact text-center">
             <div class="container">
