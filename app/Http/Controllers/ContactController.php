@@ -20,6 +20,10 @@ class ContactController extends Controller
             $contact->contact = $request->input('contact');
         }
 
+        if ($request->has('icon') && $contact->icon !== $request->input('icon')) {
+            $contact->icon = $request->input('icon');
+        }
+
         $contact->save();
 
         return redirect()->route('about');

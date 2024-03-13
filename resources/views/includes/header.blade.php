@@ -1,14 +1,3 @@
-
-<style>
-    @media print {
-        .header {
-            display: none;
-        }
-    }
-    .nav-header-link:hover {
-        background-color: #e5e5e5;
-    }
-</style>
 <div id="navbar" class="navbar navbar-expand-lg navbar-fixed mb-4">
     <div class="container">
         <a href="/" class="d-sm-block me-3">

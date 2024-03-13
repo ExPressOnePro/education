@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
+    return 'All migrations have been run';
+});
+
 Route::get('/', [Controller::class, 'home'])->name('page.app');
 Route::get('contacts', [Controller::class, 'home'])->name('about');
 Route::get('news', [Controller::class, 'home'])->name('posts');
