@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
-        $contact = Contact::query()->find($id);
+        /** @var Contact $contact */
+        $contact = Contact::query()->findOrFail($id);
 
-        // Сравнить старое значение с новым и обновить только измененные поля
-        if ($request->has('name') && $contact->name !== $request->input('name')) {
+        if ($contact->name !== $request->input('name')) {
             $contact->name = $request->input('name');
         }
 
-        if ($request->has('contact') && $contact->contact !== $request->input('contact')) {
+        if ($contact->contact !== $request->input('contact')) {
             $contact->contact = $request->input('contact');
         }
 
@@ -24,6 +25,4 @@ class ContactController extends Controller
 
         return redirect()->route('about');
     }
-
-
 }

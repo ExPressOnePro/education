@@ -4,37 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class FileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        try {
-            $files = File::all();
-            return view('pages.files.index', compact('files'));
-//            return response()->json(['status' => true, 'data' => ['media' => $media]]);
-        } catch (\Throwable $th) {
-            return response()->json(['status' => false, 'message' => $th->getMessage()]);
-        }
+        return view(
+            'pages.files.index',
+            ['files' => File::all()]
+        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function openFile($id): BinaryFileResponse
     {
-        //
-    }
-
-    public function openFile($id)
-    {
-        $file = File::findOrFail($id);
+        /** @var File $file */
+        $file = File::query()->findOrFail($id);
         $filePath = storage_path('app/public/' . $file->real_path);
 
         return response()->file($filePath);
@@ -43,59 +36,45 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'file' => 'required|file|max:2048', // Максимальный размер файла в Кб
+            'file' => 'required|file|max:2048',
         ]);
 
         $file = $request->file('file');
         $name = $request->input('file_name');
 
-        $fileType = $file->getClientMimeType(); // Получение MIME-типа файла
-        $fileSize = $file->getSize(); // Получение размера файла в байтах
-        $real_path = $request->file('file')->storeAs('uploads', $name .'.'. $file->getClientOriginalExtension(), 'public');
+        $fileType = $file->getClientMimeType();
+        $fileSize = $file->getSize();
+        $real_path = $request
+            ->file('file')
+            ?->storeAs(
+                'uploads',
+                $name .'.'. $file->getClientOriginalExtension(),
+                'public'
+            );
 
         $fileModel = new File();
-        $fileModel->user_id = Auth::user()->id;
+        $fileModel->user_id = Auth::id();
         $fileModel->file_name = $name;
         $fileModel->real_path = $real_path;
         $fileModel->file_type = $fileType;
         $fileModel->file_size = $fileSize;
         $fileModel->year = Carbon::now()->year;
-        $fileModel->publication_date = Carbon::now(); // Или другая дата публикации
+        $fileModel->publication_date = Carbon::now();
         $fileModel->save();
 
         return redirect()->route('achizition')->with('success', 'File uploaded successfully');
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
-        $file = File::find($id);
-
-        if (!$file) {
-//            return redirect()->route('achizition')->with('error', 'File not found');
-            return 'error';
-        }
+        /** @var File $file */
+        $file = File::query()->findOrFail($id);
 
         $file->file_name = $request->input('file_name');
         $file->year = $request->input('year');
@@ -108,17 +87,18 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse // why $id int?
     {
+        /** @var File $file */
+        $file = File::query()->find($id);
 
-        $file = File::find($id);
-
-        if ($file) {
-            $file->delete();
-            Storage::disk('public')->delete($file->real_path);
-            return redirect()->route('achizition')->with('success', 'File deleted successfully');
+        if (!$file) {
+            return redirect()->route('achizition')->with('error', 'File not found');
         }
 
-        return redirect()->route('achizition')->with('error', 'File not found');
+        $file->delete();
+        Storage::disk('public')->delete($file->real_path);
+
+        return redirect()->route('achizition')->with('success', 'File deleted successfully');
     }
 }

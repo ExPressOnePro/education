@@ -2,61 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\File;
-use App\Models\slide;
+use App\Models\Slide;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class SlideController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function update(Request $request, int $id): RedirectResponse
     {
-        //
-    }
+        /** @var Slide $slide */
+        $slide = Slide::query()->findOrFail($id);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        $slide = Slide::findOrFail($id);
-
-        // Проверяем, были ли изменены название и содержание слайда
         if ($request->has('title')) {
             $slide->title = $request->input('title');
         }
@@ -64,13 +22,11 @@ class SlideController extends Controller
             $slide->content = $request->input('content');
         }
 
-        // Проверяем, было ли загружено новое изображение для слайда
         if ($request->hasFile('photo')) {
             if ($slide->photo && Storage::disk('public')->exists($slide->photo)) {
                 Storage::disk('public')->delete($slide->photo);
             }
 
-            // Сохраняем новое изображение
             $file = $request->file('photo');
             $path = $file->storeAs('uploads', 'slide_'.$slide->id . '.jpg', 'public');
             $slide->photo = $path;
@@ -81,19 +37,12 @@ class SlideController extends Controller
         return redirect()->back()->with('success', 'Slide updated successfully');
     }
 
-    public function openFile($id)
+    public function openFile(int $id): BinaryFileResponse
     {
-        $file = slide::findOrFail($id);
+        /** @var Slide $file */
+        $file = Slide::query()->findOrFail($id);
         $filePath = storage_path('app/public/' . $file->photo);
 
         return response()->file($filePath);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
