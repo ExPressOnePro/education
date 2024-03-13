@@ -1,4 +1,6 @@
 <head>
+{{--  google search  --}}
+    <meta name="google-site-verification" content="ycl62JQpibGd_aZW_YW3RJXXJSr70RBhoXJPQ4vLk-4" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>@yield('title')</title>
