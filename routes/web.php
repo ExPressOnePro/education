@@ -6,7 +6,6 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SlideController;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [Controller::class, 'home'])->name('page.app');
+Route::get('/', [Controller::class, 'home'])->name('home');
 Route::get('contacts', [Controller::class, 'home'])->name('about');
 Route::get('news', [Controller::class, 'home'])->name('posts');
 Route::get('achizition', [Controller::class, 'home'])->name('achizition');
@@ -39,7 +38,6 @@ Route::get('files/open/{id}', [FileController::class, 'openFile'])->name('files.
 Route::get('storage/app/public/uploads/{id}', [SlideController::class, 'openFile'])->name('slide.open');
 
 Route::middleware('auth')->group(function () {
-
 
     Route::post('/achizition', [FileController::class, 'store'])->name('files.store');
     Route::post('/files/{id}',  [FileController::class, 'update'])->name('files.update');

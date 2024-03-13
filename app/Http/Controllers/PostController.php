@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\post;
+use App\Models\Post;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function create()
+    public function create(): View
     {
         return view('create_post');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string|max:255',

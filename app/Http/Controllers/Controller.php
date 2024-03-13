@@ -3,48 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
-use App\Models\post;
-use App\Models\Product;
-
-use App\Models\slide;
+use App\Models\Post;
+use App\Models\Slide;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Request;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function home() {
+    public function home(): View
+    {
         return view('pages.home');
     }
 
-    public function main() {
-        $posts = post::query()->get();
-        $slides = slide::get();
-        $contacts = Contact::get();
-        $compact = compact('posts', 'slides','contacts');
-        return view('pages.components.main',$compact);
-    }
-    public function about() {
-        $contacts = Contact::get();
-        $compact = compact('contacts');
-        return view('pages.components.about', $compact);
+    public function main(): View
+    {
+        return view(
+            [
+                'posts' => Post::all(),
+                'slides' => Slide::all(),
+                'contacts' => Contact::all(),
+            ]
+        );
     }
 
-    public function news(Request $request) {
-        $posts = post::query()->get();
-        $compact = compact('posts');
-        return view('pages.components.posts', $compact);
+    public function about(): View
+    {
+        return view('pages.components.about', ['contacts' => Contact::all()]);
     }
 
-
-    public function post(Request $request, $id) {
-        $post = post::query()->find($id);
-        $compact = compact('post');
-        return view('pages.components.post', $compact);
+    public function news(): View
+    {
+        return view('pages.components.posts', ['posts' => Post::all()]);
     }
 
-
+    public function post(int $id): View
+    {
+        return view(
+            'pages.components.post',
+            [
+                'post' => Post::query()->findOrFail($id),
+            ]
+        );
+    }
 }
