@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostController;
@@ -31,6 +32,7 @@ Route::get('post/{id}', [Controller::class, 'home'])->name('post');
 
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+Route::post('/contact/{id}', [ContactController::class, 'update'])->name('contact.update');
 
 Route::get('/achizition.index', [FileController::class, 'index'])->name('files.index');
 Route::get('files/open/{id}', [FileController::class, 'openFile'])->name('files.open');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\post;
 use App\Models\Product;
 
@@ -22,11 +23,14 @@ class Controller extends BaseController
     public function main() {
         $posts = post::query()->get();
         $slides = slide::get();
-        $compact = compact('posts', 'slides');
+        $contacts = Contact::get();
+        $compact = compact('posts', 'slides','contacts');
         return view('pages.components.main',$compact);
     }
     public function about() {
-        return view('pages.components.about');
+        $contacts = Contact::get();
+        $compact = compact('contacts');
+        return view('pages.components.about', $compact);
     }
 
     public function news(Request $request) {
@@ -38,7 +42,6 @@ class Controller extends BaseController
 
     public function post(Request $request, $id) {
         $post = post::query()->find($id);
-
         $compact = compact('post');
         return view('pages.components.post', $compact);
     }

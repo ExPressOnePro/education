@@ -107,7 +107,8 @@
                 </div>
             </div>
 
-            <!-- Модальное окно для редактирования слайда -->
+            @auth
+                @if(Auth::user()->role === 'Admin')
             <div class="modal fade" id="editModal{{ $slide->id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ $slide->id }}" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -136,6 +137,8 @@
                     </div>
                 </div>
             </div>
+               @endif
+            @endauth
         @endforeach
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
