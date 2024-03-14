@@ -9,20 +9,6 @@ use App\Http\Controllers\SlideController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-Route::get('/migrate', function () {
-    Artisan::call('migrate');
-    return 'All migrations have been run';
-});
 
 Route::get('/', [Controller::class, 'home'])->name('page.app');
 Route::get('contacts', [Controller::class, 'home'])->name('about');

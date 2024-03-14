@@ -1,4 +1,3 @@
-
 <div class="container px-4 py-5">
 <h2 class="text-center mb-4">CONTACTAŢI-NE</h2>
 <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
@@ -84,5 +83,4 @@
             </ul>
         </div>
     </div>
-
 </div>
